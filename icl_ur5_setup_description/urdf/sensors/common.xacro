@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+  <xacro:property name="VELOCITY_LIMIT_SCALE" value="0.6" />
+
+  <!-- Stereo Camera Location (Nominally 0) -->
+  <xacro:property name="cal_stereo_x" value="0.0" />
+  <xacro:property name="cal_stereo_y" value="0.0" />
+  <xacro:property name="cal_stereo_z" value="0.0" />
+  <xacro:property name="cal_stereo_roll" value="0.0" />
+  <xacro:property name="cal_stereo_pitch" value="0.0" />
+  <xacro:property name="cal_stereo_yaw" value="0.0" />
+
+  <!-- Kinect Camera Location (Nominally 0) -->
+  <xacro:property name="cal_kinect_x" value="0.0" />
+  <xacro:property name="cal_kinect_y" value="0.0" />
+  <xacro:property name="cal_kinect_z" value="0.0" />
+  <xacro:property name="cal_kinect_roll" value="0.0" />
+  <xacro:property name="cal_kinect_pitch" value="0.0" />
+  <xacro:property name="cal_kinect_yaw" value="0.0" />
+
+  <!-- HighDef Camera Location (Nominally 0) -->
+  <xacro:property name="cal_high_def_x" value="0.0" />
+  <xacro:property name="cal_high_def_y" value="0.0" />
+  <xacro:property name="cal_high_def_z" value="0.0" />
+  <xacro:property name="cal_high_def_roll" value="0.0" />
+  <xacro:property name="cal_high_def_pitch" value="0.0" />
+  <xacro:property name="cal_high_def_yaw" value="0.0" />
+
+  <!-- Throwing in left arm constants to appease the xacro parser -->
+  <xacro:property name="cal_l_shoulder_pan_flag" value="0.000000" />
+  <xacro:property name="cal_l_wrist_roll_flag" value="0.0" />
+
+</robot>

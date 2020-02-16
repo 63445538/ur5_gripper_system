@@ -6,6 +6,7 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
+  <arg name="sim" default="false" />
   <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" />
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
@@ -19,8 +20,9 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  <!-- Convert an xacro and put on parameter server -->
-  <param name="robot_description" command="$(find xacro)/xacro '$(find icl_ur5_setup_description)/robots/ur5_robotiq_140_joint_limited.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" />
+  <!-- Convert an xacro and put on parameter server -->  
+  <!--param name="robot_description" command="$(find xacro)/xacro '$(find icl_ur5_setup_description)/robots/ur5_robotiq_140_joint_limited.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" /-->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find icl_ur5_setup_description)/robots/ur5_robotiq_140_joint_limited_kinect2.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" />
 
   <!-- Spawn a robot into Gazebo -->
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ur5_gripper -z 0.1 
@@ -38,5 +40,9 @@
 
   <rosparam file="$(find icl_ur5_setup_gazebo)/config/gripper_controller_robotiq.yaml" command="load"/>
   <node name="gripper_controller_spawner" pkg="controller_manager" type="spawner" args="gripper" output="screen"/>
+
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 icl_ur5_setup_moveit_config ur5_gripper_moveit_planning_execution.launch sim:=true" name="timed_roslaunch1" output="screen" />
+
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 icl_ur5_setup_moveit_config moveit_rviz.launch config:=true" name="timed_roslaunch2" output="screen" />
 
 </launch>
