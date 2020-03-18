@@ -29,11 +29,13 @@
         <depthImageCameraInfoTopicName>/${camera_name}/depth/camera_info</depthImageCameraInfoTopicName>
         <pointCloudTopicName>/${camera_name}/depth/points</pointCloudTopicName>
         <frameName>${frame_name}</frameName>
+        <!--pointCloudCutoff>1.5</pointCloudCutoff-->
+        <!--pointCloudCutoffMax>3.0</pointCloudCutoffMax-->
         <pointCloudCutoff>0.5</pointCloudCutoff>
         <distortionK1>0.00000001</distortionK1>
         <distortionK2>0.00000001</distortionK2>
         <distortionK3>0.00000001</distortionK3>
-        <distortionT1>0.00000001</distortionT1>
+        <distortionT1>0.00000001</distortionT1>a
         <distortionT2>0.00000001</distortionT2>
         <CxPrime>0</CxPrime>
         <Cx>0</Cx>

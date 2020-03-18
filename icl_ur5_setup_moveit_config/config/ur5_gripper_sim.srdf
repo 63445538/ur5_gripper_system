@@ -50,6 +50,14 @@
         <joint name="wrist_2_joint" value="-1.570765" />
         <joint name="wrist_3_joint" value="0" />
     </group_state>
+    <group_state name="base_high_rg6" group="manipulator">
+        <joint name="elbow_joint" value="1.76985" />
+        <joint name="shoulder_lift_joint" value="-1.41365" />
+        <joint name="shoulder_pan_joint" value="0" />
+        <joint name="wrist_1_joint" value="-1.92481" />
+        <joint name="wrist_2_joint" value="-1.570765" />
+        <joint name="wrist_3_joint" value="0" />
+    </group_state>
     <group_state name="base_left" group="manipulator">
         <joint name="elbow_joint" value="1.10484" />
         <joint name="shoulder_lift_joint" value="-1.03809" />

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur5" >
+  <!-- include macros for UR5 and the Robotiq eef model -->
+  <!--xacro:property name="M_PI" value="3.14159265359" /-->
+  <xacro:property name="prefix" value="" />
+
+  <xacro:include filename="$(find icl_ur5_setup_description)/urdf/sensors/common.xacro" />
+  <xacro:include filename="$(find icl_ur5_setup_description)/urdf/sensors/kinect2.urdf.xacro" />
+  
+
+  <link name="world" />
+
+  <xacro:kinect2_v0 name="" parent="world" >
+    <!--origin xyz="0.4 0.0 1.2" rpy="0.0 ${pi/2} 0.0" /-->
+    <origin xyz="-1.3 1.3 1.3" rpy="0.0 ${2*pi/9} ${-1*pi/4}" />
+    </xacro:kinect2_v0>
+
+    <!--joint name="ur5_ee_link-gripper_base" type="fixed">
+      <parent link= "${prefix}ee_link" />
+      <child link = "${prefix}robotiq_arg2f_base_link" />
+      <origin xyz=" 0.04 0.0 0.0" rpy="0.0 ${pi/2} 0.0" />
+    </joint-->
+
+  <!--link name="${prefix}tool" /-->
+
+  <!--joint name="tool_tip" type="fixed">
+    <parent link= "${prefix}ee_link" />
+    <child link = "${prefix}tool" />
+    <origin xyz=" 0.00 0.0 0.1" rpy="0.0 0.0 0.0" />
+  </joint-->
+
+  <!--/xacro:macro-->
+
+  <!--xacro:ur5_with_gripper prefix=""/-->
+
+</robot>

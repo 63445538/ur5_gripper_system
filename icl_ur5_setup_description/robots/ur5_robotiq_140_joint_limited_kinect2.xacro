@@ -33,12 +33,12 @@
       <parent link= "world" />
       <child link = "${prefix}base_link" />
       <!--origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" /-->
-      <origin xyz="0.0 0.0 0.7" rpy="0.0 0.0 0.0" />
+      <origin xyz="0.0 0.0 0.4" rpy="0.0 0.0 0.0" />
     </joint>
 
     <!--force torque sensor-->
     <xacro:robotiq_fts150 prefix="" parent="ee_link" >
-      <origin xyz="0.009 0 0 " rpy="-${pi/2} 0 -${pi/2}"/>
+      <origin xyz="0.001 0 0 " rpy="-${pi/2} 0 -${pi/2}"/>
     </xacro:robotiq_fts150>
 
    <!-- gripper -->
@@ -54,10 +54,10 @@
     <joint name="tool_tip" type="fixed">
       <parent link= "${prefix}ee_link" />
       <child link = "${prefix}tool" />
-      <origin xyz=" 0.00 0.0 0.2" rpy="0.0 0.0 0.0" />
+      <origin xyz=" 0.2 0.0 0.0" rpy="0.0 0.0 0.0" />
     </joint>
 
-    </xacro:macro>
+  </xacro:macro>
 
     <xacro:kinect2_v0 name="" parent="world" >
       <!--origin xyz="0.4 0.0 1.2" rpy="0.0 ${pi/2} 0.0" /-->
