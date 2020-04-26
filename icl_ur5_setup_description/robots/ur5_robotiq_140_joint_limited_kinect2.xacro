@@ -20,7 +20,7 @@
     /-->
 
     <xacro:ur5_robot prefix="${prefix}" joint_limited="true" 
-      shoulder_pan_lower_limit="${-2*pi}" shoulder_pan_upper_limit="${2*pi}"
+      shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
       shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
       elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
       wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
@@ -61,7 +61,9 @@
 
     <xacro:kinect2_v0 name="" parent="world" >
       <!--origin xyz="0.4 0.0 1.2" rpy="0.0 ${pi/2} 0.0" /-->
-      <origin xyz="2 0.0 1.3" rpy="0.0 ${pi/3} ${pi}" />
+      <!--origin xyz="2 0.0 1.3" rpy="0.0 ${pi/3} ${pi}" /-->
+      <!--origin xyz="-1.3 1.3 1.3" rpy="0.0 ${2*pi/9} ${-1*pi/4}" /-->
+      <origin xyz="1.3 -1.3 1.3" rpy="0.0 ${2*pi/9} ${3*pi/4}" />
     </xacro:kinect2_v0>
 
   <xacro:ur5_with_gripper_joint_limited prefix=""/>
@@ -70,18 +72,18 @@
   <gazebo>
     <plugin name="gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
       <arm>
-          <arm_name>robot</arm_name>
+          <arm_name>ur5_robot</arm_name>
           <palm_link>wrist_3_link</palm_link>
           <gripper_link>left_inner_finger</gripper_link>
           <gripper_link>right_inner_finger</gripper_link>
-          <gripper_link>left_inner_knuckle</gripper_link>
-          <gripper_link>right_inner_knuckle</gripper_link>
+          <!--gripper_link>left_inner_knuckle</gripper_link>
+          <gripper_link>right_inner_knuckle</gripper_link-->
       </arm>
       <forces_angle_tolerance>120</forces_angle_tolerance>
       <update_rate>4</update_rate>
       <grip_count_threshold>4</grip_count_threshold>
       <max_grip_count>8</max_grip_count>
-      <release_tolerance>0.05</release_tolerance>
+      <release_tolerance>0.02</release_tolerance>
       <disable_collisions_on_attach>true</disable_collisions_on_attach>
       <contact_topic>__default_topic__</contact_topic>
     </plugin>

@@ -222,7 +222,7 @@
           </inertia>
         </inertial>
         <visual name='visual'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
+          <pose frame=''>0 0 0 box_name0 -0 0</pose>
           <geometry>
             <mesh>
               <uri>model://dropbox/meshes/dropbox.dae</uri>

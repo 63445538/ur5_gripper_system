@@ -75,10 +75,10 @@
         <joint name="wrist_3_joint" value="-0.15506" />
     </group_state>
 	<group_state name="open" group="gripper">
-        <joint name="finger_joint" value="0.04" />
+        <joint name="finger_joint" value="0.0" />
     </group_state>
 	<group_state name="closed" group="gripper">
-        <joint name="finger_joint" value="0.65" />
+        <joint name="finger_joint" value="0.7" />
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="fts_toolside" group="gripper" parent_group="manipulator" />

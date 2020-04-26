@@ -6,60 +6,28 @@
       <uri>model://ground_plane</uri>
     </include>
 
-    <!--model name='ground_plane'>
-      <static>1</static>
-      <link name='ground_plane_link'>
-        <collision name='ground_plane_collision'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>100</mu>
-                <mu2>50</mu2>
-              </ode>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='ground_plane_visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/DarkGrey</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-      </link>
-    </model-->
-
     <include>
       <uri>model://sun</uri>
-    </include>
+    </include>    
 
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
+
+    <light name='user_point_light' type='point'>
+      <pose frame=''>0.730235 0 1 0 -0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <direction>0 0 -1</direction>
+    </light>
+
     <!--physics name='default_physics' default='0' type='ode'>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -98,14 +66,24 @@
       <pose>0.35 0 0.2 0 0 0</pose>
     </include>
 
-    <!--include>
-      <uri>model://MPNet_TableLeft</uri>
-    </include-->
+    <include>
+      <uri>model://cracker_box</uri>
+      <pose>0.276506 0.085502 0.4 0 0 -0.407427</pose>
+    </include>
 
     <include>
-      <uri>model://MPNet_TableRight</uri>
-      <!--pose>0.5 -1 0.2 0 0 1.5707963</pose-->
-      <pose>-0.25 -0.35 0.2 0 0 1.5707963</pose>
+      <uri>model://tomato_soup_can</uri>
+      <pose>0.407051 -0.203939 0.4 0 0 -0.87517</pose>
+    </include>
+
+    <include>
+      <uri>model://mustard_bottle</uri>
+      <pose>0.306771 -0.117729 0.4 0 0 -0.358427</pose>
+    </include>
+
+    <include>
+      <uri>model://sugar_box</uri>
+      <pose>0.372242 0.036422 0.4 0 0 0.517227</pose>
     </include>
 
   </world>
