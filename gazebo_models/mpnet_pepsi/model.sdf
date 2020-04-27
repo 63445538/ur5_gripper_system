@@ -1,13 +1,22 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <model name="mpnet_pepsi">
-    <pose frame="world">1 0 0.0 1.57079632679 0 0</pose>
-    <static>true</static>
-    <link name="link">
+    <!--pose frame="world">-0.0702 0.0332 0.0 1.57079632679 0 0</pose-->
+    <!--static>true</static-->
+    <link name="mpnet_pepsi_link">
       <inertial>
-        <mass>0.1</mass>
+        <mass>0.2</mass>
+	<!--inertia>
+    	  <ixx>0.01</ixx>
+    	  <ixy>0</ixy>
+    	  <ixz>0</ixz>
+    	  <iyy>0.01</iyy>
+    	  <iyz>0</iyz>
+    	  <izz>0.01</izz>
+	</inertia-->
       </inertial>
-      <visual name="visual">
+      <visual name="mpnet_pepsi_visual">
+	<!--pose frame=''>0.0702 -0.0332 0.0 0 0 0</pose-->
         <geometry>
           <mesh>
             <uri>model://mpnet_pepsi/meshes/pepsi.STL</uri>
@@ -15,6 +24,17 @@
           </mesh>
         </geometry>
       </visual>
+
+      <collision name="mpnet_pepsi_collision">
+	<!--pose frame=''>0.0702 -0.0332 0.0 0 0 0</pose-->
+        <geometry>
+          <mesh>
+            <uri>model://mpnet_pepsi/meshes/pepsi.STL</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
     </link>
   </model>
 </sdf>

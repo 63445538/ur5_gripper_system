@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <model name="mpnet_bottle">
-    <pose frame="world">1 0 0.0 0 0 0</pose>
-    <static>true</static>
-    <link name="link">
+    <pose frame="world">0 0 0.0 0 0 0</pose>
+    <!--static>true</static-->
+    <link name="mpnet_bottle_link">
       <inertial>
         <mass>0.1</mass>
       </inertial>
-      <visual name="visual">
+      <visual name="mpnet_bottle_visual">
         <geometry>
           <mesh>
             <uri>model://mpnet_bottle/meshes/bottle.stl</uri>
@@ -15,6 +15,16 @@
           </mesh>
         </geometry>
       </visual>
+
+      <collision name="mpnet_bottle_collision">
+        <geometry>
+          <mesh>
+            <uri>model://mpnet_bottle/meshes/bottle.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
     </link>
   </model>
 </sdf>

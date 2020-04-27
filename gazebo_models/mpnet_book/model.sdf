@@ -1,13 +1,21 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <model name="mpnet_book">
-    <pose frame="world">1 0 0.0 0 0 0</pose>
-    <static>true</static>
-    <link name="link">
+    <pose frame="world">0 0 0.0 0 0 0</pose>
+    <!--static>true</static-->
+    <link name="mpnet_book_link">
       <inertial>
         <mass>0.1</mass>
+	<inertia>
+    	  <ixx>0.01</ixx>
+    	  <ixy>0</ixy>
+    	  <ixz>0</ixz>
+    	  <iyy>0.01</iyy>
+    	  <iyz>0</iyz>
+    	  <izz>0.01</izz>
+	</inertia>
       </inertial>
-      <visual name="visual">
+      <visual name="mpnet_book_visual">
         <geometry>
           <mesh>
             <uri>model://mpnet_book/meshes/Dictionary.STL</uri>
@@ -15,6 +23,41 @@
           </mesh>
         </geometry>
       </visual>
+      <collision name='mpnet_book_collision'>
+        <pose frame=''>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://mpnet_book/meshes/Dictionary.STL</uri>
+              <scale>0.0017 0.0017 0.0017</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <!--fdir1>0.0 0.0 0.0</fdir1-->
+                <!--slip1>0.01</slip1>
+                <slip2>0.01</slip2-->
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
     </link>
   </model>
 </sdf>

@@ -1,19 +1,28 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
   <model name="mpnet_box1">
-    <pose frame="world">1 0 0.0 0 0 0</pose>
-    <static>true</static>
-    <link name="link">
+    <pose frame="world">0 0 0.0 0 0 0</pose>
+    <!--static>true</static-->
+    <link name="mpnet_box1_link">
       <inertial>
         <mass>0.1</mass>
       </inertial>
-      <visual name="visual">
+      <visual name="mpnet_box1_visual">
         <geometry>
           <box>
             <size>0.14 0.09 0.12</size>
           </box>
         </geometry>
       </visual>
+
+      <collision name="mpnet_box1_collision">
+        <geometry>
+          <box>
+            <size>0.14 0.09 0.12</size>
+          </box>
+        </geometry>
+      </collision>
+
     </link>
   </model>
 </sdf>
