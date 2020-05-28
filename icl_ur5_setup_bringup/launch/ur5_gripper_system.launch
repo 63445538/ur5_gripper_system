@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- start the D415 -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch" >
+    </include>
+
+    <!-- start the robot -->
+    <include file="$(find icl_ur5_setup_bringup)/launch/ur5_gripper_bringup.launch">
+        <!--arg name="limited" value="true" /-->
+        <arg name="robot_ip" value="192.168.1.191" />
+    </include>
+    <include file="$(find icl_ur5_setup_moveit_config)/launch/ur5_gripper_moveit_planning_execution.launch">
+        <arg name="limited" value="true" />
+        <arg name="sim" value="false" />
+    </include>
+
+    <!--node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args="-0.4708250693000702 -0.8985088769806574 0.6466402512908431 -0.9205569318165614 0.014872625724423449 -0.01618156823825035 0.38998961157688616 base camera_color_frame 10" /-->
+
+    <node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args="-0.4708250693000702 -0.8985088769806574 0.6466402512908431 -0.9205569318165614 0.014872625724423449 -0.01618156823825035 0.38998961157688616 base camera_link 10" />
+
+    <!--node pkg="tf" type="static_transform_publisher" name="camera_relation_broadcaster" args="0 -0.015010774398508722 0.000136918198091328 0.0002776993496809155  -0.0012506683124229312 0.0009470490622334182 0.9999986886978149 camera_color_frame camera_link 10" /-->
+
+</launch>

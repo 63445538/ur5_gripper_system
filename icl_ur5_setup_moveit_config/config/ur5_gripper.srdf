@@ -34,19 +34,50 @@
         <joint name="wrist_2_joint" value="0" />
         <joint name="wrist_3_joint" value="0" />
     </group_state>
+    <group_state name="base_high" group="manipulator">
+        <joint name="elbow_joint" value="1.82563" />
+        <joint name="shoulder_lift_joint" value="-1.36084" />
+        <joint name="shoulder_pan_joint" value="0" />
+        <joint name="wrist_1_joint" value="-2.03355" />
+        <joint name="wrist_2_joint" value="-1.570765" />
+        <joint name="wrist_3_joint" value="0" />
+    </group_state>
+    <group_state name="base_high_rg6" group="manipulator">
+        <joint name="elbow_joint" value="1.76985" />
+        <joint name="shoulder_lift_joint" value="-1.41365" />
+        <joint name="shoulder_pan_joint" value="0" />
+        <joint name="wrist_1_joint" value="-1.92481" />
+        <joint name="wrist_2_joint" value="-1.570765" />
+        <joint name="wrist_3_joint" value="0" />
+    </group_state>
+    <group_state name="base_left" group="manipulator">
+        <joint name="elbow_joint" value="1.10484" />
+        <joint name="shoulder_lift_joint" value="-1.03809" />
+        <joint name="shoulder_pan_joint" value="-1.72522" />
+        <joint name="wrist_1_joint" value="-1.63517" />
+        <joint name="wrist_2_joint" value="-1.57035" />
+        <joint name="wrist_3_joint" value="-0.31054" />
+    </group_state>
+    <group_state name="base_right" group="manipulator">
+        <joint name="elbow_joint" value="1.10520" />
+        <joint name="shoulder_lift_joint" value="-1.03808" />
+        <joint name="shoulder_pan_joint" value="1.41643" />
+        <joint name="wrist_1_joint" value="-1.63556" />
+        <joint name="wrist_2_joint" value="-1.57095" />
+        <joint name="wrist_3_joint" value="-0.15506" />
+    </group_state>
 
-	<group_state name="open" group="gripper">
+    <!--group_state name="open" group="gripper">
         <joint name="finger_joint" value="0.3" />
     </group_state>
-
-	<group_state name="closed" group="gripper">
+    <group_state name="closed" group="gripper">
         <joint name="finger_joint" value="0.83" />
-    </group_state>
+    </group_state-->
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="fts_toolside" group="gripper" parent_group="manipulator" />
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <!-- <virtual_joint name="fixed_base" type="fixed" parent_frame="world" child_link="fixed_link" /> ->
+    <!-- <virtual_joint name="fixed_base" type="fixed" parent_frame="world" child_link="fixed_link" />-->
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="left_inner_finger_joint" />
     <passive_joint name="left_inner_knuckle_joint" />

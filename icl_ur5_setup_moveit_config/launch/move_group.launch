@@ -1,10 +1,12 @@
+<?xml version="1.0"?>
 <launch>
 
-  <arg name="limited" default="false"/>
-  <arg name="sim" default="true" />
+  <arg name="limited" default="true"/>
+  <arg name="sim" default="false"/>
+
   <include file="$(find icl_ur5_setup_moveit_config)/launch/planning_context.launch" >
     <arg name="limited" value="$(arg limited)" />
-	<arg name="sim" value="$(arg sim)" />
+    <arg name="sim" value="$(arg sim)" />
   </include>
 
   <!-- GDB Debug Option -->
@@ -35,7 +37,7 @@
     <arg name="moveit_manage_controllers" value="true" />
     <arg name="moveit_controller_manager" value="ur5_gripper" unless="$(arg fake_execution)"/>
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
-	<arg name="sim" value="$(arg sim)" />
+    <arg name="sim" value="$(arg sim)" />
   </include>
 
   <!-- Sensors Functionality -->
@@ -46,7 +48,7 @@
   <!-- Start the actual move_group node/action server -->
   <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
 	
-	<!-- <remap from="joint_states" to="/icl_phri_ur5/joint_states"/> -->
+    <remap unless="$(arg sim)" from="joint_states" to="/joint_states_full"/>
 
     <!-- Set the display variable, in case OpenGL code is used internally -->
     <env name="DISPLAY" value="$(optenv DISPLAY :0)" />

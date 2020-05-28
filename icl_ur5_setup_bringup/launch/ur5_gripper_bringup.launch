@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="limited" value="true" />
+    <arg name="sim" value="false" />
+    <arg name="robot_ip" default="192.168.1.191" />
+    <!-- By default, we do not start a database (it can be large) -->
+    <arg name="db" default="true" />
+    <arg name="pub_robot_state" value="false" />
+
+    <!--arg name="gripper_port" default="/dev/ttyUSB0" />
+    <arg name="gripper_name" default="icl_gripper/gripper_cmd" /-->
+	
+    <!--UR5 bringup-->
+    <include file="$(find icl_ur5_setup_bringup)/launch/ur5_gripper_standalone.launch">
+        <arg name="robot_ip" value="$(arg robot_ip)" />
+        <arg name="limited" value="$(arg limited)" />
+	<arg name="pub_robot_state" value="$(arg pub_robot_state)" />
+    </include>
+	
+    <!--gripper bringup-->
+    <node name="gripper_node" pkg="rg6_gripper_bringup" type="gripper.py" >
+    </node>
+	
+    <node name="joint_state_republisher" pkg="rg6_gripper_bringup" type="gripper_joint_state_publisher.py">
+        <!--param name = "gripper_ns" value = "icl_gripper"/-->
+    </node>
+
+    <node unless="$(arg pub_robot_state)" name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <remap from="joint_states" to="joint_states_full" />
+    </node>
+
+    <!--node pkg="tf" type="static_transform_publisher" name="ar_broadcaster" args="-0.021 0.0 0.065 -3.1415926 0 0 tool0 ar_link 100" /-->
+
+</launch>

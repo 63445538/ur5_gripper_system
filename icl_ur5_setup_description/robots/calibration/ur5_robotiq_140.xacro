@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5_gripper">
+
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+  <!-- include macros for UR5 and the Robotiq eef model -->
+  <xacro:include filename="$(find ur_description)/urdf/calibration/common.gazebo.xacro" />
+  <xacro:include filename="$(find ur_description)/urdf/calibration/ur5.urdf.xacro" />
+  <xacro:include filename="$(find icl_ur5_setup_description)/urdf/robotiq_arg2f_140_model_macro.xacro" />
+  <xacro:include filename="$(find icl_ur5_setup_description)/urdf/robotiq_fts300.urdf.xacro" />
+  <xacro:include filename="$(find icl_ur5_setup_description)/urdf/sensors/common.xacro" />
+
+  <xacro:arg name="kinematics_config" default="$(find ur_description)/config/ur5_default.yaml"/>
+  <xacro:macro name="ur5_with_gripper" params="prefix">
+    <!-- arm -->
+    <xacro:ur5_robot prefix="${prefix}" joint_limited="false" />
+    <!-- gripper -->
+    <xacro:robotiq_arg2f_140 prefix="${prefix}" 
+      transmission_hw_interface="$(arg transmission_hw_interface)"
+      kinematics_file="${load_yaml('$(arg kinematics_config)')}"/>
+
+    <!--dummy link-->
+    <link name="world" />
+    <joint name="fixed_link_robot_base" type="fixed">
+      <parent link= "world" />
+      <child link = "${prefix}base_link" />
+      <origin xyz="0.0 0.0 0.4" rpy="0.0 0.0 0.0" />
+    </joint>
+
+    <!--force torque sensor-->
+    <xacro:robotiq_fts150 prefix="" parent="ee_link" >
+      <origin xyz="0.001 0 0 " rpy="-${pi/2} 0 -${pi/2}"/>
+    </xacro:robotiq_fts150>
+
+    <xacro:robotiq_arg2f_140 prefix="${prefix}" />
+    <joint name="ur5_ee_link_gripper_base" type="fixed">
+      <parent link= "${prefix}fts_toolside" />
+      <child link = "${prefix}robotiq_arg2f_base_link" />
+      <origin xyz=" 0.0 0.0 0.0" rpy="0.0 0.0 ${pi/2}" />
+    </joint>
+
+    <link name="${prefix}tool" />
+    <joint name="tool_tip" type="fixed">
+      <parent link= "${prefix}ee_link" />
+      <child link = "${prefix}tool" />
+      <origin xyz=" 0.2 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:ur5_with_gripper prefix=""/>
+
+ <!-- Plugin -->
+  <gazebo>
+    <plugin name="gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
+      <arm>
+          <arm_name>ur5_robot</arm_name>
+          <palm_link>wrist_3_link</palm_link>
+          <gripper_link>left_inner_finger</gripper_link>
+          <gripper_link>right_inner_finger</gripper_link>
+          <!--gripper_link>left_inner_knuckle</gripper_link>
+          <gripper_link>right_inner_knuckle</gripper_link-->
+      </arm>
+      <forces_angle_tolerance>120</forces_angle_tolerance>
+      <update_rate>4</update_rate>
+      <grip_count_threshold>4</grip_count_threshold>
+      <max_grip_count>8</max_grip_count>
+      <release_tolerance>0.02</release_tolerance>
+      <disable_collisions_on_attach>true</disable_collisions_on_attach>
+      <contact_topic>__default_topic__</contact_topic>
+    </plugin>
+  </gazebo>
+
+</robot>

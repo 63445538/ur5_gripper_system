@@ -1,7 +1,8 @@
 controller_list:
 # -------------for real UR5---------------------------------
 #  - name: vel_based_pos_traj_controller
-  - name: icl_ur5
+#  - name: ur5
+  - name: scaled_pos_traj_controller
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     default: true
@@ -13,7 +14,7 @@ controller_list:
       - wrist_2_joint
       - wrist_3_joint
 
-  - name: icl_gripper
+  - name: gripper
     action_ns: gripper_cmd
     type: GripperCommand
     default: true
