@@ -45,8 +45,8 @@
   <rosparam file="$(find icl_ur5_setup_gazebo)/config/gripper_controller_robotiq.yaml" command="load"/>
   <node name="gripper_controller_spawner" pkg="controller_manager" type="spawner" args="gripper" output="screen"/>
 
-  <!--node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 icl_ur5_setup_moveit_config ur5_gripper_moveit_planning_execution.launch sim:=true" name="timed_roslaunch1" output="screen" />
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 icl_ur5_setup_moveit_config ur5_gripper_moveit_planning_execution.launch sim:=true" name="timed_roslaunch1" output="screen" />
 
-  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 icl_ur5_setup_moveit_config moveit_rviz.launch config:=true" name="timed_roslaunch2" output="screen" /-->
+  <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 icl_ur5_setup_moveit_config moveit_rviz.launch config:=true" name="timed_roslaunch2" output="screen" />
 
 </launch>

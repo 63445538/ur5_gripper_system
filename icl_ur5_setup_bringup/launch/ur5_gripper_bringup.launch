@@ -29,6 +29,6 @@
       <remap from="joint_states" to="joint_states_full" />
     </node>
 
-    <!--node pkg="tf" type="static_transform_publisher" name="ar_broadcaster" args="-0.021 0.0 0.065 -3.1415926 0 0 tool0 ar_link 100" /-->
+    <node pkg="tf" type="static_transform_publisher" name="ar_broadcaster" args="-0.021 0.0 0.065 -3.1415926 0 0 tool0 ar_link 100" />
 
 </launch>

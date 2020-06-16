@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from rg6.srv import Grip, GripResponse
-from rg6.msg import Gripper
+from rg6_gripper_bringup.srv import Grip, GripResponse
+from rg6_gripper_bringup.msg import Gripper
 from ur_msgs.srv  import SetIO
 from ur_msgs.msg  import IOStates, ToolDataMsg
 from ur_dashboard_msgs.srv import Load, GetProgramState, RawRequest
@@ -90,19 +90,22 @@ class GripperSerivce(object):
         # self.script_pub.publish(self.gripper_close_command_string)
         self.gripper_digital_io_setting(0, 1)
         # width_value = width_value*16 + 4
-        self.gripper_analog_io_setting(0, 1.0 - (1.0 - width_value)/0.7)
+        self.gripper_analog_io_setting(0, (1.0 - width_value))
         rospy.sleep(self.io_setting_sleep_time)
         # rospy.loginfo("renew the program thread")
         # self.renew_program()
         return True
 
-    def gripper_open(self, width_value):
+    def gripper_control(self, width, force):
         # self.script_pub.publish(self.gripper_open_command_string)
+        width_cmd = (140-width)/140.0
+        force_cmd = (force-25)/95.0
         self.gripper_digital_io_setting(0, 1)
-        # width_value = width_value*16 + 4
-        # rospy.loginfo(width_value)
-        self.gripper_analog_io_setting(0, (1.0 - width_value)/0.7)
-        rospy.sleep(self.io_setting_sleep_time)
+        self.gripper_analog_io_setting(0, (1.0 - width_cmd))
+        self.gripper_analog_io_setting(1, force_cmd)
+        gripper_state = String()
+        while abs(width-self.gripper_info.width) > 2 and not self.gripper_info.grippedDetected:
+            rospy.sleep(0.1)
         # rospy.loginfo("renew the program thread")
         # self.renew_program()
         return True
@@ -125,17 +128,18 @@ class GripperSerivce(object):
         except rospy.ServiceException as e:
             rospy.logwarn ("Service call failed: %s"%e)
     
-    def Grip_handler(self,req):
-        grip_control = 1 if req.grip else 0
-        self.program_load()
-        if grip_control == 1:
-            self.gripper_close()
-        else:
-            self.gripper_open()
-        return GripResponse(True)
+    # def Grip_handler(self,req):
+    #     grip_control = 1 if req.grip else 0
+    #     self.program_load()
+    #     if grip_control == 1:
+    #         self.gripper_close()
+    #     else:
+    #         self.gripper_open()
+    #     return GripResponse(True)
 
     def gripper_server_cb(self, goal): 
-        if self.gripper_open(goal.command.position):
+        result = self.gripper_control(goal.command.position, goal.command.max_effort)
+        if result:
             self.gripper_server_result.reached_goal = True
             self.gripper_server.set_succeeded(self.gripper_server_result)
         else:
@@ -156,10 +160,8 @@ class GripperSerivce(object):
         # print(self.current_program_state)
         if self.current_program_name == 'null' or self.current_program_name != self.gripper_script_name:
             self.load_program(self.gripper_script_name)
-        self.gripper_close()
-        rospy.sleep(2)
         rospy.loginfo("gripper close excuted")
-        self.gripper_open()
+        self.gripper_control(100,60)
         rospy.loginfo("gripper open excuted")
 
     def io_callback(self,data):
@@ -179,7 +181,7 @@ class GripperSerivce(object):
 def main():
     rospy.init_node('rg6_gripper_node')
     ur5_gripper = GripperSerivce()
-    rate = rospy.Rate(100) 
+    rate = rospy.Rate(100)
     while not rospy.is_shutdown():
         ur5_gripper.gripper_info_publish()
         rate.sleep()

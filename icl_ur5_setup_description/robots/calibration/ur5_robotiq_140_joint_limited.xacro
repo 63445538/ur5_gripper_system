@@ -57,11 +57,18 @@
       <origin xyz=" 0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
     </joint>
 
-    <link name="${prefix}tool" />
+    <!--link name="${prefix}tool" />
     <joint name="tool_tip" type="fixed">
       <parent link= "${prefix}ee_link" />
       <child link = "${prefix}tool" />
       <origin xyz=" 0.2 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </joint-->
+
+    <link name="${prefix}tool" />
+    <joint name="tool_tip" type="fixed">
+      <parent link= "${prefix}ee_link" />
+      <child link = "${prefix}tool" />
+      <origin xyz="0.234333227426 0.0 0.0" rpy="1.57064 0.0 1.57067" />
     </joint>
 
   </xacro:macro>

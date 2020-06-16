@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from sensor_msgs.msg import JointState
-from rg6.msg import Gripper
+from rg6_gripper_bringup.msg import Gripper
 from copy import deepcopy
 import message_filters
 from robotiq_2f_gripper_control.msg import _Robotiq2FGripper_robot_input  as inputMsg
@@ -23,7 +23,7 @@ class FullState:
         msg.name = list(ur5_joints.name)
         msg.name.append('finger_joint')
         msg.position = list(ur5_joints.position)
-        msg.position.append((1.0-(gripper_joint.width/150.0))*0.7)
+        msg.position.append((1.0-(gripper_joint.width/140.0))*0.7)
         msg.velocity = list(ur5_joints.velocity)
         msg.velocity.append(0.0)
         msg.effort = list(ur5_joints.effort)
