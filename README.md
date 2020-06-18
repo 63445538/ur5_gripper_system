@@ -79,4 +79,4 @@ position value 0.8: close
 
 __Reference__
 
-This repo learns a lot from [icl_phri_ur5](https://github.com/intuitivecomputing/icl_phri_ur5), [UR5-with-Robotiq-Gripper-and-Kinect](https://github.com/philwall3/UR5-with-Robotiq-Gripper-and-Kinect) and [tams_ur5_setup](https://github.com/TAMS-Group/tams_ur5_setup)
+This repo learns a lot from [ur5_with_robotiq_gripper](https://github.com/intuitivecomputing/ur5_with_robotiq_gripper)
