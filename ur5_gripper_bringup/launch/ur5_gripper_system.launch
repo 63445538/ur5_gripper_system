@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- start the D415 -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch" >
+    </include>
+
+    <!-- start the robot -->
+    <include file="$(find ur5_gripper_bringup)/launch/ur5_gripper_bringup.launch">
+        <!--arg name="limited" value="true" /-->
+        <arg name="robot_ip" value="192.168.1.191" />
+    </include>
+    <include file="$(find ur5_setup_moveit_config)/launch/ur5_gripper_moveit_planning_execution.launch">
+        <arg name="limited" value="true" />
+        <arg name="sim" value="false" />
+    </include>
+
+    <!--node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args="-0.4708250693000702 -0.8985088769806574 0.6466402512908431 -0.9205569318165614 0.014872625724423449 -0.01618156823825035 0.38998961157688616 base camera_color_frame 10" /-->
+
+    <node pkg="tf" type="static_transform_publisher" name="camera_pose_broadcaster" args="-0.46228927640017875 -1.1973878755860117 0.39894444304787335 -0.8418740213143397 0.009034562836680715 -0.0061418403233153675 0.5395635149894918 base camera_color_optical_frame 10" />
+
+    <node pkg="tf" type="static_transform_publisher" name="camera_relation_broadcaster" args="0.0150107743985 -0.000136918198091 3.73840841154e-05 0.500290003649  -0.500959353361 0.499986384399 0.498761635987 camera_color_optical_frame camera_link 10" />
+
+    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" args="2 ur5_setup_moveit_config moveit_rviz.launch config:=true" name="timed_roslaunch1" output="screen" />
+
+</launch>

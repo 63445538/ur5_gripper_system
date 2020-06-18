@@ -1,5 +1,5 @@
 # ur5_with_robotiq_gripper
-Author: Yuxiang Gao and Yeping Wang
+Author: Rui Cao
 
 ---
 __ROS Version__ : Kinetic
