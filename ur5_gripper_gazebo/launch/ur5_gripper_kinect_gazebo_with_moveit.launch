@@ -24,6 +24,7 @@
   <!-- Convert an xacro and put on parameter server -->  
   <!--param name="robot_description" command="$(find xacro)/xacro '$(find ur5_gripper_description)/robots/ur5_robotiq_140_joint_limited.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" /-->
   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ur5_gripper_description)/robots/ur5_robotiq_140_joint_limited_kinect2.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" />
+  <!--param name="robot_description" command="$(find xacro)/xacro inorder '$(find ur5_gripper_description)/urdf/ur5_joint_limited_robot.urdf.xacro' transmission_hw_interface:=$(arg transmission_hw_interface)" /-->
 
   <!-- Spawn a robot into Gazebo -->
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ur5_gripper -z 0.0

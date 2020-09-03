@@ -1,10 +1,10 @@
 <launch>
   <arg name="sim" default="true"/>
   <group unless="$(arg sim)"> 
-  	<rosparam file="$(find ur5_gripper_moveit_config)/config/controllers.yaml"/>
+  	<rosparam file="$(find ur5_gripper_moveit_config)/config/3f_controllers.yaml"/>
   </group>
   <group if="$(arg sim)"> 
-  	<rosparam file="$(find ur5_gripper_moveit_config)/config/controllers_sim.yaml"/>
+  	<rosparam file="$(find ur5_gripper_moveit_config)/config/3f_controllers_sim.yaml"/>
   </group>
 
   <param name="use_controller_manager" value="false"/>

@@ -85,25 +85,25 @@ class GripperSerivce(object):
         except rospy.ServiceException as e:
             rospy.logwarn ("Service call failed: %s"%e)
 
-    def gripper_close(self, width_value):
-        # rospy.sleep(3)
-        # self.script_pub.publish(self.gripper_close_command_string)
-        self.gripper_digital_io_setting(0, 1)
-        # width_value = width_value*16 + 4
-        self.gripper_analog_io_setting(0, (1.0 - width_value))
-        rospy.sleep(self.io_setting_sleep_time)
-        # rospy.loginfo("renew the program thread")
-        # self.renew_program()
-        return True
+    # def gripper_close(self, width_value):
+    #     # rospy.sleep(3)
+    #     # self.script_pub.publish(self.gripper_close_command_string)
+    #     self.gripper_digital_io_setting(0, 1)
+    #     # width_value = width_value*16 + 4
+    #     self.gripper_analog_io_setting(0, (1.0 - width_value))
+    #     rospy.sleep(self.io_setting_sleep_time)
+    #     # rospy.loginfo("renew the program thread")
+    #     # self.renew_program()
+    #     return True
 
     def gripper_control(self, width, force):
         # self.script_pub.publish(self.gripper_open_command_string)
-        width_cmd = (140-width)/140.0
+        width_cmd = width/140.0
         force_cmd = (force-25)/95.0
         self.gripper_digital_io_setting(0, 1)
-        self.gripper_analog_io_setting(0, (1.0 - width_cmd))
+        self.gripper_analog_io_setting(0, width_cmd)
         self.gripper_analog_io_setting(1, force_cmd)
-        gripper_state = String()
+        # gripper_state = String()
         while abs(width-self.gripper_info.width) > 2 and not self.gripper_info.grippedDetected:
             rospy.sleep(0.1)
         # rospy.loginfo("renew the program thread")

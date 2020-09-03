@@ -3,8 +3,9 @@
 
   <arg name="limited" default="true"/>
   <arg name="sim" default="false"/>
+  <arg name="gripper_type" default="2f" />
 
-  <include file="$(find ur5_gripper_moveit_config)/launch/planning_context.launch" >
+  <include file="$(find ur5_gripper_moveit_config)/launch/$(arg gripper_type)_planning_context.launch">
     <arg name="limited" value="$(arg limited)" />
     <arg name="sim" value="$(arg sim)" />
   </include>
@@ -35,8 +36,9 @@
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find ur5_gripper_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_manage_controllers" value="true" />
-    <arg name="moveit_controller_manager" value="ur5_gripper" unless="$(arg fake_execution)"/>
-    <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
+    <arg name="moveit_controller_manager" value="ur5_gripper" unless="$(arg fake_execution)" />
+    <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)" />
+    <arg name="gripper_type" value="$(arg gripper_type)" />
     <arg name="sim" value="$(arg sim)" />
   </include>
 

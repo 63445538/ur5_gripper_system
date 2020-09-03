@@ -8,13 +8,13 @@ __Dependence__
 
 [universal_robot](https://github.com/ros-industrial/universal_robot) : URDFs and Meshes for UR5
 
-[ur_modern_driver](https://github.com/ros-industrial/ur_modern_driver) : Drivers for UR5.
+[Universal_Robots_ROS_Driver](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver) : Drivers for UR5.
 
 [robotiq](https://github.com/ros-industrial/robotiq) : Drivers for the Robotiq gripper.
 
 [roboticsgroup_gazebo_plugins](https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins) : For the gripper simulation in Gazebo
 
-[ros_controllers]: For the CripperActionController. Can be installed with `sudo apt-get install ros-kinetic-ros-controllers`
+[ros_controllers](https://github.com/ros-controls/ros_control) : For the CripperActionController. Can be installed with `sudo apt-get install ros-kinetic-ros-controllers`
 
 ---
 
@@ -24,58 +24,55 @@ __Usage with Gazebo simulation__
 
 To start the Gazebo simulated ur5 and the gripper:
 
-```roslaunch icl_ur5_setup_gazebo icl_ur5_gripper.launch```
+```roslaunch ur5_gripper_gazebo ur5_gripper_gazebo.launch```
 
 Then bring up the moveit:
 
-```roslaunch icl_ur5_setup_moveit_config ur5_gripper_moveit_planning_execution.launch sim:=true```
+```roslaunch ur5_gripper_moveit_config ur5_gripper_moveit_planning_execution.launch sim:=true```
 
 Finally, run a Rviz to visualize the trajectory:
 
-```roslaunch icl_ur5_setup_moveit_config moveit_rviz.launch config:=true```
+```roslaunch ur5_gripper_moveit_config moveit_rviz.launch config:=true```
 
 To bringup the slide bar for each joint:
-```
-rosrun rqt_joint_trajectory_controller rqt_joint_trajectory_controller
-```
+
+```rosrun rqt_joint_trajectory_controller rqt_joint_trajectory_controller```
 
 ---
 
 __Usage with the hardware__
 
-This package communicates with Robotiq 140 gripper using the [robotiq_action_server](https://github.com/ros-industrial/robotiq/tree/kinetic-devel/robotiq_2f_gripper_action_server) through Modbus RTU protocol, so the first step to do is to connect the gripper using USB.
+In real hardware system, we use Onrobot RG6 gripper, however, the movable URDF model is unavailable now. We use Robotiq 140mm gripper as a replacement of URDF model in simulation and Moveit computation in planning.
 
-To bring up the whole arm configuration with all drivers, you can use the following command:
+First, copy the script "External_control.urp" that is in the folder "uscript" to the teachpad via usb disk, then run this script by "load program" button.
 
-```roslaunch icl_ur5_setup_bringup ur5_gripper.launch```
+Then, to bring up the whole arm configuration with all drivers, you can use the following command:
 
-If there are some connection error, you may need to change the `robot_ip` and `gripper_port` in the launch file. To find the robot ip address:
+```roslaunch ur5_gripper_bringup ur5_gripper_bringup.launch```
 
-UR’s teach-pendant -> Setup Robot -> Setup Network Menu -> ip address
+If there are some connection error, you may need to change the `robot_ip` in the launch file. To find the robot ip address:
 
-Activited the gripper:
+UR’s teachpad -> Setup Robot -> Setup Network Menu -> ip address
 
-```roslaunch icl_ur5_setup_bringup activate_gripper.launch```
-
-Then press 'r' to reset and press 'a' to activite the gripper.
+After launched the bringup file, click the "play" button in teachpad, you would notice the info:"Robot ready to receive control commands".
 
 Bring up the moveit:
 
-```roslaunch icl_ur5_setup_moveit_config ur5_gripper_moveit_planning_execution.launch```
+```roslaunch ur5_gripper_moveit_config ur5_gripper_moveit_planning_execution.launch sim:=false```
 
 Finally, run a Rviz to visualize the trajectory:
 
-```roslaunch icl_ur5_setup_moveit_config moveit_rviz.launch config:=true```
+```roslaunch ur5_gripper_moveit_config moveit_rviz.launch config:=true```
 
 ---
 
 __To control the gripper__
 
-Publish the position value to `icl_gripper/gripper_cmd/goal` (or the topic under a similar name). 
+Publish the position value to `gripper/gripper_cmd/goal` (or the topic under a similar name). 
 
-position value 0.0: open
+position value 0.0: close
 
-position value 0.8: close
+position value 150: open with 150mm stroke
 
 __Reference__
 
